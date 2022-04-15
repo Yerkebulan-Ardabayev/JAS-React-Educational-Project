@@ -38,5 +38,4 @@ const reducer = function (state = initState, action) {
     localStorage.setItem('todos', JSON.stringify(newState.todos))
     return newState
 }
-
 export const store = createStore(reducer)
