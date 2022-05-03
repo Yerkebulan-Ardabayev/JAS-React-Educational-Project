@@ -172,3 +172,55 @@ a {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.App {
+    font-family: sans-serif;
+}
+
+.movie_card {
+    position: relative;
+    height: 300px;
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.movie_card__poster {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    object-position: center center;
+    box-sizing: border-box;
+    transition: background-size 0.3s;
+}
+
+.movie_card__title {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: white;
+}
+.singlePhoto{
+    width: 100%;
+    height: 100%;
+    margin-left: 590px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.singlePhotoTitle{
+    margin-top: 8px;
+    margin-bottom: 0;
+    margin-left: 590px;
+    color: rgb(114, 49, 49);
+    font-size: 20px;
+    font-weight: bold;
+}

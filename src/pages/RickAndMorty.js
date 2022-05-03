@@ -35,7 +35,7 @@ export function RickAndMorty() {
   }, [episodePage]);
 
   function getAllEpisodes() {
-    fetch(`https://rickandmortyapi.com/api/episode/?page=${episodePage}`)
+    fetch(`https://RickAndMortyapi.com/api/episode/?page=${episodePage}`)
       .then((res) => res.json())
       .then((data) => {
         setEpisodes((prev) => [...prev, ...data.results]);
@@ -47,7 +47,7 @@ export function RickAndMorty() {
 
   function getAllCharacters({ pageInfo = page, sortBy = sort } = {}) {
     fetch(
-      `https://rickandmortyapi.com/api/character/?page=${pageInfo}&name=${query}&status=${sortBy}`
+      `https://RickAndMortyapi.com/api/character/?page=${pageInfo}&name=${query}&status=${sortBy}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -183,8 +183,8 @@ export function RickAndMorty() {
                                 character.status === "Alive"
                                   ? "rgb(85, 204, 68)"
                                   : character.status === "Dead"
-                                  ? "rgb(214, 61, 46)"
-                                  : "rgb(158, 158, 158)",
+                                    ? "rgb(214, 61, 46)"
+                                    : "rgb(158, 158, 158)",
                             }}
                           ></span>
                           {character.status} - {character.species}

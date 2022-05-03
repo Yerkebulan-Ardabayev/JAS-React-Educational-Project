@@ -14,7 +14,7 @@ export function CharacterPage() {
   const [character, setCharacter] = useState([]);
 
   function getCharacterData() {
-    fetch(`https://rickandmortyapi.com/api/character/${params.id}`)
+    fetch(`https://RickAndMortyapi.com/api/character/${params.id}`)
       .then((res) => res.json())
       .then((data) => setCharacter(data));
   }
@@ -59,8 +59,8 @@ export function CharacterPage() {
                     character.status === "Alive"
                       ? "rgb(85, 204, 68)"
                       : character.status === "Dead"
-                      ? "rgb(214, 61, 46)"
-                      : "rgb(158, 158, 158)",
+                        ? "rgb(214, 61, 46)"
+                        : "rgb(158, 158, 158)",
                   width: 20,
                   height: 20,
                 }}
