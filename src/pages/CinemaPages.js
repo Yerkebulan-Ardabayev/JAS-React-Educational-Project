@@ -26,11 +26,22 @@ export function CinemaPages() {
 
   return (
     <div>
+      <h1
+        style={{
+          margin: 0,
+          marginBottom: 40,
+          fontSize:80,
+          fontWeight: 800,
+          textAlign: "center",
+          color: "rgb(32, 35, 41)",
+        }}
+      >
+        The Breaking Bad
+      </h1>
       <Grid container spacing={2}>
         {movies.map((movie) => (
           <Grid item lg={12 / 5}>
             <CinemaPage movie={movie} />
-
           </Grid>
         ))}
       </Grid>
