@@ -9,9 +9,11 @@ import { Auth } from "./context/Auth";
 import { useState } from "react";
 import { Counter } from "./components/Counter";
 import { TodoPage } from "./pages/TodoPage";
-import { CinemaPage } from "./pages/CinemaPage";
 import { CinemaPages } from "./pages/CinemaPages";
 import { BreakingBadCharPage } from './pages/BreakingBadCharPage';
+
+
+
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('idToken'))
@@ -32,6 +34,7 @@ function App() {
                 </Routes>
             </div>
         </Auth.Provider>
+        
     );
 }
 

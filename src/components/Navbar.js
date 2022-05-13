@@ -8,15 +8,43 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Auth } from "../context/Auth";
+import styled from '@emotion/styled';
+
 
 export const Navbar = () => {
     const navigate = useNavigate()
     const { token } = useContext(Auth)
+    const [expand, setExpand] = useState(false);
+    const [subList, setSubList] = useState(false);
+
+    const handleMouseEnter = () => {
+        setExpand(true);
+    }
+
+    const handleMouseLeave = () => {
+        setExpand(false);
+        setSubList(false);
+    }
+
+    const firstLevelList = ['Movies', 'RickAndMorty', 'Cinema', 'Catalog'];
+    const secondLevelList = ['SignIn', 'Counter', 'Todo', 'BreakingBad'];
+
+    const CatalogList = styled("div")`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    text-align: center;
+    z-index: 1;
+    `
+    const CatalogItem = styled("div")`
+    display: block;
+    color: black;`
 
     return (
-        <AppBar position="static">
+        <AppBar position="relative">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ flexGrow: 1, display: 'flex' }}>
@@ -50,6 +78,49 @@ export const Navbar = () => {
                         >
                             The Breaking Bad
                         </Button>
+
+                        <div style={{
+                            display: 'flex',
+                            position:'relative',
+                        }}>
+                            <Button
+                                onClick={handleMouseEnter}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Каталог
+                            </Button>
+                            <div style={{
+                                display: 'flex',
+                                position: 'absolute',
+                                top: '70px',
+                            }}>
+                                <CatalogList onMouseLeave={handleMouseLeave}>
+                                    {expand && firstLevelList.map((item, index) => (
+                                        <p onMouseEnter={() => {
+                                            setSubList(true);
+                                        }} style={{
+                                            backgroundColor: 'white',
+                                            margin: '0px',
+                                            padding: '20px',
+                                        }}>
+                                            {item}
+                                        </p>
+                                    ))
+                                    }
+                                </CatalogList>
+                                <CatalogItem onMouseEnter={handleMouseEnter}>
+                                    {subList && secondLevelList.map((item, index) => (
+                                        <p style={{
+                                            backgroundColor: 'white',
+                                            margin: '0px',
+                                            padding: '20px',
+                                        }}>
+                                            {item}
+                                        </p>
+                                    ))}
+                                </CatalogItem>
+                            </div>
+                        </div>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

@@ -31,7 +31,6 @@ export function BreakingBadCharPage() {
       <h3 className="singlePhotoTitle">Status: {character[0]?.status}</h3>
       <h3 className="singlePhotoTitle">Occupation: {character[0]?.occupation}</h3>
       <h3 className="singlePhotoTitle">Actor: {character[0]?.portrayed}</h3>
-      
     </div>
     
   );

@@ -1,5 +1,3 @@
-import star from "../icons/star.svg";
-import { CinemaPages } from "./CinemaPages";
 import { useNavigate } from "react-router-dom";
 
 export function CinemaPage({ movie }) {
