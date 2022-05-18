@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { MoviesPage } from "./pages/MoviesPage";
 import { MoviePage } from "./pages/MoviePage";
@@ -11,9 +11,7 @@ import { Counter } from "./components/Counter";
 import { TodoPage } from "./pages/TodoPage";
 import { CinemaPages } from "./pages/CinemaPages";
 import { BreakingBadCharPage } from './pages/BreakingBadCharPage';
-
-
-
+import { UsersModule } from "./components/UsersModule";
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('idToken'))
@@ -31,10 +29,12 @@ function App() {
                     <Route path="/todo" element={<TodoPage />} />
                     <Route path="/cinema/" element={<CinemaPages />} />
                     <Route path="/cinema/:id" element={<BreakingBadCharPage />} />
+                    <Route path="/registration" element={<UsersModule />} />
+                    <Route path="/" element={<Navigate to="/movies" replace />} />
                 </Routes>
             </div>
         </Auth.Provider>
-        
+
     );
 }
 

@@ -12,7 +12,6 @@ import { useContext, useState } from "react";
 import { Auth } from "../context/Auth";
 import styled from '@emotion/styled';
 
-
 export const Navbar = () => {
     const navigate = useNavigate()
     const { token } = useContext(Auth)
@@ -37,8 +36,8 @@ export const Navbar = () => {
     justify-content: center;
     color: black;
     text-align: center;
-    z-index: 1;
-    `
+    z-index: 1;`
+
     const CatalogItem = styled("div")`
     display: block;
     color: black;`
@@ -78,7 +77,6 @@ export const Navbar = () => {
                         >
                             The Breaking Bad
                         </Button>
-
                         <div style={{
                             display: 'flex',
                             position:'relative',
@@ -138,6 +136,12 @@ export const Navbar = () => {
                                 Sign In
                             </Button>
                         )}
+                        <Button
+                            onClick={() => navigate('/registration')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Registration
+                        </Button>
                     </Box>
                 </Toolbar>
             </Container>
