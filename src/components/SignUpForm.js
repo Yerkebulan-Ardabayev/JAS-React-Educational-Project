@@ -51,8 +51,6 @@ export function SignUpForm() {
         })
     }
 
-
-
     return (
         <Form onSubmit={validateForm}>
             <TextField

@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter, Switch } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { MoviesPage } from "./pages/MoviesPage";
 import { MoviePage } from "./pages/MoviePage";
@@ -12,10 +12,12 @@ import { TodoPage } from "./pages/TodoPage";
 import { CinemaPages } from "./pages/CinemaPages";
 import { BreakingBadCharPage } from './pages/BreakingBadCharPage';
 import { UsersModule } from "./components/UsersModule";
+import { ShopModule } from "./components/shop/ShopModule";
+
 
 function App() {
-    const [token, setToken] = useState(localStorage.getItem('idToken'))
-
+    const [token, setToken] = useState(localStorage.getItem('idToken'))   
+    
     return (
         <Auth.Provider value={{ token, setToken }}>
             <div className="App">
@@ -29,6 +31,7 @@ function App() {
                     <Route path="/todo" element={<TodoPage />} />
                     <Route path="/cinema/" element={<CinemaPages />} />
                     <Route path="/cinema/:id" element={<BreakingBadCharPage />} />
+                    <Route path="/shop" element={<ShopModule />} />
                     <Route path="/registration" element={<UsersModule />} />
                     <Route path="/" element={<Navigate to="/movies" replace />} />
                 </Routes>
@@ -37,5 +40,4 @@ function App() {
 
     );
 }
-
 export default App;
