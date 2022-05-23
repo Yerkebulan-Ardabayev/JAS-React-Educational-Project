@@ -1,3 +1,4 @@
+import '../shop/ShopStyle.css';
 import {
   Button,
   Divider,
@@ -12,6 +13,8 @@ import React, { useMemo } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+const dollarPrice = 427;
+
 const StyledBox = styled(Box)`
   width: 400px;
   background: violet;
@@ -24,7 +27,13 @@ const StyledBox = styled(Box)`
   padding: 8px;
   border-radius: 8px;
 `;
-export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
+export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {  
+
+  function countAllPrices(items) {
+    return items.reduce((acc, item) => acc + item.price * item.count * dollarPrice, 0)
+      .toFixed(2);
+  }
+
   return (
     <Modal {...props}>
       <StyledBox>
@@ -55,7 +64,7 @@ export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
                     alt=""
                     src={item.image}
                     style={{
-                      width: "80px",
+                      width: "100px",
                       height: "80px",
                       objectFit: "contain"
                     }}
@@ -65,13 +74,13 @@ export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
                   primary={`${item.title} x${item.count}`}
                   secondary={
                     <Typography
-                      sx={{ display: "inline" }}
+                      sx={{ display: "block", with: "150px" }}
                       component="span"
                       variant="body2"
                       color="text.primary"
                     >
-                      ${item.price * item.count}
-                      {item.count > 1 && <>(${item.price} per item)</>}
+                      {item.price * item.count * dollarPrice} тeнге.
+                      {item.count > 1 && <>({item.price * dollarPrice} тенге за штуку)</>}
                     </Typography>
                   }
                 />
@@ -91,7 +100,14 @@ export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
                     <KeyboardArrowDownIcon />
                   </Button>
                 </div>
+                
               </ListItem>
+              <div className="TotalPrice">
+                <Typography>
+                  Total price: <br />
+                  {countAllPrices(basket)} тенге.
+                </Typography>
+              </div>
             </>
           ))}
         </List>
