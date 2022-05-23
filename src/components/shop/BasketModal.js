@@ -8,10 +8,12 @@ import {
   ListItemText,
   styled
 } from "@mui/material";
+import { useState } from "react";
 import { Box, Modal, Typography } from "@mui/material";
-import React, { useMemo } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const dollarPrice = 427;
 
@@ -27,8 +29,9 @@ const StyledBox = styled(Box)`
   padding: 8px;
   border-radius: 8px;
 `;
-export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {  
-
+export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
+  
+  
   function countAllPrices(items) {
     return items.reduce((acc, item) => acc + item.price * item.count * dollarPrice, 0)
       .toFixed(2);
@@ -97,16 +100,29 @@ export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
                   </Button>
                   {item.count}
                   <Button onClick={() => onBasketItemCountChange(item, -1)}>
+                    
                     <KeyboardArrowDownIcon />
                   </Button>
                 </div>
-                
               </ListItem>
               <div className="TotalPrice">
                 <Typography>
                   Total price: <br />
                   {countAllPrices(basket)} тенге.
                 </Typography>
+              </div>
+              <div className="DeleteItems">
+                <Button sx={{
+                    display: "flex",
+                    color: "red",
+                    justifyContent: "flex-end",
+                    width: "1px",
+                    height: "1px",
+                  }}>                  
+                  <svg data-test id="DeleteIcon">
+                    <DeleteIcon/>
+                  </svg>
+                </Button>
               </div>
             </>
           ))}
