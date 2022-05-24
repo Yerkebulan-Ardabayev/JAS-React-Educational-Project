@@ -8,7 +8,6 @@ import {
   ListItemText,
   styled
 } from "@mui/material";
-import { useState } from "react";
 import { Box, Modal, Typography } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -29,9 +28,10 @@ const StyledBox = styled(Box)`
   padding: 8px;
   border-radius: 8px;
 `;
-export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
-  
-  
+
+export const BasketModal = ({ basket, onDeleteItem, onBasketItemCountChange, ...props }) => {
+     
+ 
   function countAllPrices(items) {
     return items.reduce((acc, item) => acc + item.price * item.count * dollarPrice, 0)
       .toFixed(2);
@@ -112,13 +112,15 @@ export const BasketModal = ({ basket, onBasketItemCountChange, ...props }) => {
                 </Typography>
               </div>
               <div className="DeleteItems">
-                <Button sx={{
+                <Button
+                  onClick={() => onDeleteItem(item.id)}
+                  sx={{
                     display: "flex",
                     color: "red",
                     justifyContent: "flex-end",
                     width: "1px",
                     height: "1px",
-                  }}>                  
+                  }}>                
                   <svg data-test id="DeleteIcon">
                     <DeleteIcon/>
                   </svg>

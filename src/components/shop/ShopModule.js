@@ -21,6 +21,10 @@ export const ShopModule = () => {
 
   console.log(basket);
 
+  function deleteItemFromBasket(id) {
+    setBasket(basket.filter(item => item.id !== id));
+  }
+
   useEffect(() => {
     fetchProducts().then(setProducts);
   }, []);
@@ -73,6 +77,7 @@ export const ShopModule = () => {
         onClose={() => setOpenBasket(false)}
         basket={basket}
         onBasketItemCountChange={handleBasketItemCount}
+        onDeleteItem={deleteItemFromBasket}
       />
       <Container>
         <Grid container gap={2} justifyContent="center">
