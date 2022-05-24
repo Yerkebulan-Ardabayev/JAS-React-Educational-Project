@@ -21,10 +21,17 @@ export const ShopModule = () => {
 
   console.log(basket);
 
-  function deleteItemFromBasket(id) {
-    setBasket(basket.filter(item => item.id !== id));
-  }
-
+  // function deleteItemFromBasket(id) {
+  //   setBasket(basket.filter(item => item.id !== id));
+  // }
+  const deleteItemFromBasket = useCallback(
+    id => {
+      setBasket(basket.filter(item => item.id !== id));
+    },
+    [basket]
+  );
+  
+  
   useEffect(() => {
     fetchProducts().then(setProducts);
   }, []);

@@ -30,8 +30,7 @@ const StyledBox = styled(Box)`
 `;
 
 export const BasketModal = ({ basket, onDeleteItem, onBasketItemCountChange, ...props }) => {
-     
- 
+      
   function countAllPrices(items) {
     return items.reduce((acc, item) => acc + item.price * item.count * dollarPrice, 0)
       .toFixed(2);
