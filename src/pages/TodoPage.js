@@ -4,7 +4,7 @@ import { TodoList } from "../components/TodoList";
 import { useDispatch, useSelector } from "react-redux";
 
 export function TodoPage() {
-    const { todos } = useSelector((state) => state.todogit);
+    const { todos } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
 
     const handleCreate = useCallback(
