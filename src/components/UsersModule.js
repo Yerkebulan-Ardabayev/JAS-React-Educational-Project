@@ -1,7 +1,10 @@
 import { IconButton, styled } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { RegistrationForm } from "./RegistrationForm";
+import { LoginForm } from "./LoginForm";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { localStorageUsersKey } from "./constants/index";
 
 const RegistrationFormStyled = styled(RegistrationForm)`
   margin-right: 30px;
@@ -22,15 +25,29 @@ const List = styled("ul")`
   }
 `;
 export const UsersModule = () => {
-  const { control } = useForm();
+  const [token, setToken] = useState();
+  const { control } = useForm({
+    defaultValues: {
+      users: JSON.parse(localStorage.getItem(localStorageUsersKey)) ?? []
+    }
+  });
   const { fields: users, append, remove } = useFieldArray({
     control,
     name: "users"
   });
 
+  useEffect(() => {
+    localStorage.setItem(localStorageUsersKey, JSON.stringify(users));
+  }, [users]);
+
+  console.log(token);
+
   return (
     <Wrapper>
-      <RegistrationFormStyled onUserCreated={append} />
+      <div>
+        <LoginForm setToken={setToken} />
+        <RegistrationFormStyled onUserCreated={append} />
+      </div>
       <div>
         <h4>Users</h4>
         <List>

@@ -1,16 +1,16 @@
-import {TodoItem} from "./TodoItem";
-import {useMemo} from "react";
+import { TodoItem } from "./TodoItem";
+import { useMemo } from "react";
 
 export function TodoList({ todos, onTodoChange }) {
     const sortedTodos = useMemo(() => {
-        const s = [...todos]
-        return s.sort((a, b) => a.done - b.done)
-    }, [todos])
+        const s = [...(todos ?? [])];
+        return s.sort((a, b) => a.done - b.done);
+    }, [todos]);
     return (
-        <ul>
+        <div style={{ border: "2px solid red", width: "500px" }}>
             {sortedTodos.map((todo) => (
                 <TodoItem key={todo.created} todo={todo} onTodoChange={onTodoChange} />
             ))}
-        </ul>
-    )
+        </div>
+    );
 }
