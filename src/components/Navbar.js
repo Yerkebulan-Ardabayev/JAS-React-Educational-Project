@@ -27,8 +27,8 @@ export const Navbar = () => {
         setSubList(false);
     }
 
-    const firstLevelList = ['Movies', 'RickAndMorty', 'Cinema', 'Catalog'];
-    const secondLevelList = ['SignIn', 'Counter', 'Todo', 'BreakingBad'];
+    const firstLevelList = ['Movies', 'Cinema', 'Catalog'];
+    const secondLevelList = ['SignIn', 'Todo', 'BreakingBad'];
 
     const CatalogList = styled("div")`
     display: flex;
@@ -52,24 +52,6 @@ export const Navbar = () => {
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Movies
-                        </Button>
-                        <Button
-                            onClick={() => navigate('/RickAndMorty')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            Rick & Morty
-                        </Button>
-                        <Button
-                            onClick={() => navigate('/counter')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            Counter
-                        </Button>
-                        <Button
-                            onClick={() => navigate('/todo')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            ToDo
                         </Button>
                         <Button
                             onClick={() => navigate('/cinema')}
