@@ -19,7 +19,7 @@ export const ShopModule = () => {
   const [openBasket, setOpenBasket] = useState(false);
   const [basket, setBasket] = useState([]);
 
-  console.log(basket);
+  
 
   // function deleteItemFromBasket(id) {
   //   setBasket(basket.filter(item => item.id !== id));

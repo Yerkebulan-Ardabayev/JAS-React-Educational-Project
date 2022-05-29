@@ -224,3 +224,11 @@ a {
     font-size: 20px;
     font-weight: bold;
 }
+.CatalogItem{
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+    top: 70px;
+    z-index: 1;
+    left: 9px;
+}

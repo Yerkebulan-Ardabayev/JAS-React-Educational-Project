@@ -8,15 +8,54 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom'
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Auth } from "../context/Auth";
 import styled from '@emotion/styled';
+import { getEstroiData } from '../fetchers/e-stroi';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+const ListItem = styled.p`
+    background-color: white;
+    padding: 3px 89px 3px 14px;
+    margin: 0;
+    border: 1px solid #f5f5f5;
+    &:hover {
+        background: blue;
+        color: white;
+        cursor: pointer;
+    }
+    
+    ${({ active }) => active && ({
+        background: 'blue',
+        color: 'white',
+    })}
+`
+const CatalogList = styled("div")`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    text-align: center;
+    
+    z-index: 1;`
+
+const CatalogItem = styled("div")`
+    display: block;
+   
+    color: black;`
 
 export const Navbar = () => {
     const navigate = useNavigate()
     const { token } = useContext(Auth)
     const [expand, setExpand] = useState(false);
-    const [subList, setSubList] = useState(false);
+    const [catalogItems, setCatalogItems] = useState([]);
+    const [selectedFirstLevelItem, setSelectedFirstLevelItem] = useState();
+
+    useEffect(() => {
+        getEstroiData().then(data => {
+            setCatalogItems(data)
+        })
+    }, [])
 
     const handleMouseEnter = () => {
         setExpand(true);
@@ -24,23 +63,7 @@ export const Navbar = () => {
 
     const handleMouseLeave = () => {
         setExpand(false);
-        setSubList(false);
     }
-
-    const firstLevelList = ['Movies', 'Cinema', 'Catalog'];
-    const secondLevelList = ['SignIn', 'Todo', 'BreakingBad'];
-
-    const CatalogList = styled("div")`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: black;
-    text-align: center;
-    z-index: 1;`
-
-    const CatalogItem = styled("div")`
-    display: block;
-    color: black;`
 
     return (
         <AppBar position="relative">
@@ -61,44 +84,37 @@ export const Navbar = () => {
                         </Button>
                         <div style={{
                             display: 'flex',
-                            position:'relative',
+                            position: 'relative',
                         }}>
                             <Button
+                                endIcon={<KeyboardArrowDownIcon
+                                    sx={{display: 'flex' }} />}
                                 onClick={handleMouseEnter}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ color: 'white', display: 'flex' }}
                             >
                                 Каталог
                             </Button>
-                            <div style={{
-                                display: 'flex',
-                                position: 'absolute',
-                                top: '70px',
-                            }}>
-                                <CatalogList onMouseLeave={handleMouseLeave}>
-                                    {expand && firstLevelList.map((item, index) => (
-                                        <p onMouseEnter={() => {
-                                            setSubList(true);
-                                        }} style={{
-                                            backgroundColor: 'white',
-                                            margin: '0px',
-                                            padding: '20px',
-                                        }}>
-                                            {item}
-                                        </p>
+                            <div className='CatalogItem'
+                                onMouseLeave={handleMouseLeave}>
+                                <CatalogList>
+                                    {expand && catalogItems.map((item) => (
+                                        <ListItem
+                                            onClick={() => setSelectedFirstLevelItem(item)}
+                                            active={item === selectedFirstLevelItem}
+                                        >
+                                            {item.name}
+                                        </ListItem>
                                     ))
                                     }
                                 </CatalogList>
-                                <CatalogItem onMouseEnter={handleMouseEnter}>
-                                    {subList && secondLevelList.map((item, index) => (
-                                        <p style={{
-                                            backgroundColor: 'white',
-                                            margin: '0px',
-                                            padding: '20px',
-                                        }}>
-                                            {item}
-                                        </p>
+                                {expand && selectedFirstLevelItem &&
+                                    <CatalogItem onMouseEnter={handleMouseEnter}>
+                                    {selectedFirstLevelItem.childCategories.map((item, index) => (
+                                        <ListItem>
+                                            {item.name}
+                                        </ListItem>
                                     ))}
-                                </CatalogItem>
+                                    </CatalogItem>}
                             </div>
                         </div>
                         <Button
@@ -113,22 +129,22 @@ export const Navbar = () => {
                         {token ? (
                             <Tooltip title="Open settings">
                                 <IconButton sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <Avatar />
                                 </IconButton>
                             </Tooltip>
                         ) : (
-                            <Button
-                                onClick={() => navigate('/signin')}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                Sign In
-                            </Button>
-                        )}
                         <Button
-                            onClick={() => navigate('/registration')}
+                            onClick={() => navigate('/login')}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                            Registration
+                            Login
+                        </Button>
+                        )}
+                        <Button
+                            onClick={() => navigate('/signup')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Sign up
                         </Button>
                     </Box>
                 </Toolbar>
