@@ -1,6 +1,7 @@
 import {CategoryCounter, CategoryItem} from "./CategoryItem";
 import styled from "@emotion/styled";
-import {LinkBase} from "./LinkBase";
+import { LinkBase } from "./LinkBase";
+
 
 const Grid = styled.div`
   display: grid;

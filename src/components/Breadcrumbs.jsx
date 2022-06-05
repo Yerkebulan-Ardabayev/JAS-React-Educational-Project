@@ -23,7 +23,7 @@ export const Breadcrumbs = ({ links }) => {
         return (
           <>
             <Breadcrumb to={link.to}>{link.label}</Breadcrumb>
-            <Arrow>></Arrow>
+            <Arrow> {'>'} </Arrow>
           </>
         )
       }
