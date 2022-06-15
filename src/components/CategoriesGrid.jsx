@@ -1,27 +1,48 @@
-import {CategoryCounter, CategoryItem} from "./CategoryItem";
 import styled from "@emotion/styled";
-import { LinkBase } from "./LinkBase";
+import TreeView from "@mui/lab/TreeView";
+import TreeItem from "@mui/lab/TreeItem";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
-  gap: 15px;
-`
+const Flex = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 250px;
+`;
 
-export function CategoriesGrid({ categories }) {
+const CategoryItems = ({ categories, onClick }) => {
   return (
-    <Grid>
+    <>
       {categories?.map((category) => (
-        <LinkBase to={`/home?categoryId=${category.id}`}>
-          <CategoryItem>
-            {category.name}
-            <CategoryCounter>
-              {category.childCount}
-            </CategoryCounter>
-          </CategoryItem>
-        </LinkBase>
+        <TreeItem
+          onClick={() => onClick(category)}
+          nodeId={category.id}
+          label={category.name + " " + category.childCount}
+        >
+          {category.childCategories && category.childCategories.length > 0 ? (
+            <CategoryItems
+              onClick={onClick}
+              categories={category.childCategories}
+            />
+          ) : null}
+        </TreeItem>
       ))}
-    </Grid>
-  )
+    </>
+  );
+};
+
+export function CategoriesGrid({ categories, onClick }) {
+  return (
+    <Flex>
+      <TreeView
+        aria-label="multi-select"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+      >
+        <CategoryItems categories={categories} onClick={onClick} />
+      </TreeView>
+    </Flex>
+  );
 }

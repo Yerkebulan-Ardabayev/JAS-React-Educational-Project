@@ -10,13 +10,3 @@ export const CategoryItem = styled.div`
   align-items: center;
 `
 
-export const CategoryCounter = styled.div`
-  height: 32px;
-  width: 32px;
-  background: #ABABAB;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-`
