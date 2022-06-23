@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 import { ProductItem } from "./ProductItem";
 
 export const ProductGrid = ({ products }) => {
@@ -11,7 +12,9 @@ export const ProductGrid = ({ products }) => {
     >
       {products?.map((product) => (
         <Grid item xs={4} sm={4} md={4} key={product.id}>
-          <ProductItem>{product.name}</ProductItem>
+          <Link className="LinkSingleProduct" to={`/product/${product.id}`}>
+            <ProductItem>{product.name}</ProductItem>
+          </Link>
         </Grid>
       ))}
     </Grid>

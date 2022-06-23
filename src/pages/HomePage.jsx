@@ -6,15 +6,16 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { fetchCatalogItem } from "../fetchers/fetchCatalogItem";
 import { ProductGrid } from "../components/ProductGrid";
 
-
 function svgNoContentReturn() {
   return (
-    <div style={{
-      height: "250px",
-      width: "100%",
-      margin: "0 auto",
-      marginLeft: "250px",
-    }}>
+    <div
+      style={{
+        height: "250px",
+        width: "100%",
+        margin: "0 auto",
+        marginLeft: "250px",
+      }}
+    >
       <svg
         width="550"
         height="250"
@@ -73,6 +74,7 @@ export const HomePage = () => {
         <CategoriesGrid
           categories={categories}
           onClick={(category) => navigate("/home?categoryId=" + category.id)}
+          hideChildren
         />
         {products?.length > 0 ? (
           <ProductGrid products={products} />
@@ -80,7 +82,6 @@ export const HomePage = () => {
           svgNoContentReturn()
         )}
       </div>
-      
     </Container>
   );
 };

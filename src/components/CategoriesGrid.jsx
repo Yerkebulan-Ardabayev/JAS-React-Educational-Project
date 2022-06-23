@@ -4,7 +4,6 @@ import TreeItem from "@mui/lab/TreeItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-
 const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -12,7 +11,7 @@ const Flex = styled.div`
   width: 250px;
 `;
 
-const CategoryItems = ({ categories, onClick }) => {
+const CategoryItems = ({ categories, onClick, hideChildren }) => {
   return (
     <>
       {categories?.map((category) => (
@@ -21,10 +20,12 @@ const CategoryItems = ({ categories, onClick }) => {
           nodeId={category.id}
           label={category.name + " " + category.childCount}
         >
-          {category.childCategories && category.childCategories.length > 0 ? (
+          {!hideChildren && category.childCategories &&
+          category.childCategories.length > 0 ? (
             <CategoryItems
               onClick={onClick}
-              categories={category.childCategories}
+                categories={category.childCategories}
+                hideChildren
             />
           ) : null}
         </TreeItem>
@@ -33,7 +34,7 @@ const CategoryItems = ({ categories, onClick }) => {
   );
 };
 
-export function CategoriesGrid({ categories, onClick }) {
+export function CategoriesGrid({ categories, onClick, hideChildren, childCategories }) {
   return (
     <Flex>
       <TreeView
@@ -41,7 +42,11 @@ export function CategoriesGrid({ categories, onClick }) {
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
       >
-        <CategoryItems categories={categories} onClick={onClick} />
+        <CategoryItems
+          categories={categories}
+          onClick={onClick}
+          hideChildren={hideChildren}
+        />
       </TreeView>
     </Flex>
   );
